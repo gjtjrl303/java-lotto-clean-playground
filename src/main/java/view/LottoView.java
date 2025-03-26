@@ -1,9 +1,8 @@
 package view;
 
 import domain.Lotto;
-import domain.LottoNumber;
+import domain.LottoResult;
 import enums.LottoRank;
-import utils.LottoNumberFormatter;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,7 @@ import java.util.Scanner;
 
 public class LottoView {
 
-    final Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public int inputMoneyView() {
         System.out.println("구입금액을 입력해 주세요");
@@ -25,17 +24,16 @@ public class LottoView {
         }
     }
 
-    public List<Integer> inputWinningNumbersView() {
+    public String inputWinningNumbersView() {
         scanner.nextLine();
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String numbersString = scanner.nextLine();
-        List<Integer> inputNumbers = LottoNumberFormatter.parse(numbersString);
-        return inputNumbers;
+         return scanner.nextLine();
+
     }
 
     public void printLotto(Lotto lotto) {
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        List<Integer> lottoNumbers = lotto.getLottoNumbers();
         System.out.println(lottoNumbers);
 
     }
