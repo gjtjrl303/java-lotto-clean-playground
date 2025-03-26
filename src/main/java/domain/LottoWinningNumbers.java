@@ -1,5 +1,7 @@
 package domain;
 
+import controller.LottoController;
+
 import java.util.List;
 
 public class LottoWinningNumbers {
@@ -7,12 +9,12 @@ public class LottoWinningNumbers {
     private final Lotto winningNumbers;
 
     public LottoWinningNumbers(List<Integer> numbers) {
-        winningNumbers = Lotto.from(numbers);
+        winningNumbers = new Lotto(numbers);
     }
 
-    public int matchCount(Lotto lotto) {
+    public Integer matchCount(Lotto lotto) {
         return (int) lotto.getLottoNumbers().stream()
-                .filter(number -> winningNumbers.getLottoNumbers().contains(number))
+                .filter(winningNumbers.getLottoNumbers()::contains)
                 .count();
     }
 }

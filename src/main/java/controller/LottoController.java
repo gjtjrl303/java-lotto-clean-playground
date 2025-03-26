@@ -2,7 +2,7 @@ package controller;
 
 import domain.*;
 import enums.LottoRank;
-import domain.LottoShop;
+import utils.LottoNumberFormatter;
 import view.LottoView;
 
 import java.util.List;
@@ -13,14 +13,13 @@ public class LottoController {
     private final LottoShop lottoShop;
     private final LottoView lottoView;
 
-    public LottoController(LottoShop lottoShop, LottoView lottoView) {
-        this.lottoShop = lottoShop;
-        this.lottoView = lottoView;
+    public LottoController() {
+        lottoShop = new LottoShop();
+        lottoView = new LottoView();
     }
 
     public void inputMoney() {
-        Integer amount = lottoView.inputMoneyView();
-        Money money = new Money(amount);
+        Integer money = lottoView.inputMoneyView();
         lottoShop.inputMoney(money);
     }
 
@@ -39,8 +38,12 @@ public class LottoController {
     }
 
     public void inputWinningNumbers() {
-        List<Integer> inputNumbers = lottoView.inputWinningNumbersView();
-        lottoShop.inputWinningNumbers(inputNumbers);
+        String winningNumberInput = lottoView.inputWinningNumbersView();
+        List<Integer> winningNumbers = LottoNumberFormatter.parse(winningNumberInput);
+        if (winningNumbers.size() != 6) {
+            throw new IllegalStateException("숫자를 6개 입력하세요");
+        }
+        lottoShop.inputWinningNumbers(winningNumbers);
     }
 
     public void printResultByRank() {
