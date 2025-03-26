@@ -2,6 +2,7 @@ package domain;
 
 
 import enums.LottoRank;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,9 @@ class LottoResultTest {
 
     @BeforeEach
     void beforeEach() {
-        Lotto lotto1 = Lotto.from(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
-        Lotto lotto2 = Lotto.from(new ArrayList<>(List.of(4, 5, 6, 7, 8, 9)));
-        Lotto lotto3 = Lotto.from(new ArrayList<>(List.of(1, 2, 5, 6, 9, 10)));
+        Lotto lotto1 = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto lotto2 = new Lotto(new ArrayList<>(List.of(4, 5, 6, 7, 8, 9)));
+        Lotto lotto3 = new Lotto(new ArrayList<>(List.of(1, 2, 5, 6, 9, 10)));
 
         lottos = new ArrayList<>(List.of(lotto1, lotto2, lotto3));
         lottoWinningNumbers = new LottoWinningNumbers(List.of(1, 2, 3, 4, 5, 6));
