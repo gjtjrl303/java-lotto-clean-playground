@@ -6,6 +6,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import static domain.Money.PRICE_PER_TICKET;
+
 public class LottoResult {
 
     private final Map<LottoRank, Integer> resultByRank;
@@ -24,8 +26,8 @@ public class LottoResult {
     }
 
     public Double calculateProfitRate() {
-        Double totalPrize = calculatePrize();
-        return totalPrize / (lottos.size() * 1000);
+        PrizeMoney totalPrize = calculatePrize();
+        return totalPrize.getAmount() / (lottos.size() * PRICE_PER_TICKET);
     }
 
     public Map<LottoRank, Integer> getResultByRank() {
@@ -43,11 +45,14 @@ public class LottoResult {
         resultByRank.put(lottoRank, resultByRank.get(lottoRank) + 1);
     }
 
-    private Double calculatePrize() {
-        Double totalPrize = 0.0;
+    private PrizeMoney calculatePrize() {
+
+        PrizeMoney totalPrize = new PrizeMoney(0.0);
 
         for (Map.Entry<LottoRank, Integer> matchCount : resultByRank.entrySet()) {
-            totalPrize += matchCount.getKey().getPrize() * matchCount.getValue();
+            PrizeMoney prizePerRank = new PrizeMoney(matchCount.getKey().getPrize());
+            PrizeMoney prizeTotal = prizePerRank.multiply(matchCount.getValue());
+            totalPrize = totalPrize.plus(prizeTotal);
         }
         return totalPrize;
     }

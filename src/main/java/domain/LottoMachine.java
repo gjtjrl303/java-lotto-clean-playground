@@ -5,35 +5,24 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private static final Integer PRICE_PER_LOTTO = 1000;
+    private static final int PRICE_PER_LOTTO = 1000;
 
-    private final NumberGenerator numberGenerator;
+    private final LottoNumberGenerator numberGenerator;
     private final LottoRepository lottoRepository;
-    private Integer lottoCount;
+    private Money money;
 
 
     public LottoMachine() {
         lottoRepository = new LottoRepository();
-        numberGenerator = new NumberGenerator();
+        numberGenerator = new LottoNumberGenerator();
     }
 
-    public void inputMoney(Integer money) {
-        validateMoney(money);
-        lottoCount = money / PRICE_PER_LOTTO;
-    }
-
-    private void validateMoney(Integer money) {
-        if (money < PRICE_PER_LOTTO) {
-            throw new IllegalArgumentException("티켓은 1000원 입니다");
-        }
-
-        if ((money %= PRICE_PER_LOTTO) != 0) {
-            throw new IllegalArgumentException("티켓은 한장은 1000원 입니다");
-        }
+    public void inputMoney(Money money) {
+        this.money = money;
     }
 
     public void generateLottos() {
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < money.getPurchasedLottoCount(); i++) {
             Lotto lotto = createSingleLotto();
             saveLotto(lotto);
         }
@@ -54,6 +43,7 @@ public class LottoMachine {
     }
 
     public int getLottoCount() {
-        return lottoCount;
+        return (int) money.getPurchasedLottoCount();
     }
+
 }
