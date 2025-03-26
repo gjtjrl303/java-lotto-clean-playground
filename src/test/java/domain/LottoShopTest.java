@@ -15,9 +15,10 @@ class LottoShopTest {
     @DisplayName("가격에_맞춰서_로또를_발급한다")
     void 가격에_맞춰서_로또를_발급한다() {
         //given
-        lottoShop.inputMoney(14000);
+        lottoShop.inputMoney(new Money(14000));
 
         //when
+        lottoShop.generateLottos();
         List<Lotto> purchasedLottos = lottoShop.getPurchasedLottos();
 
         //then
@@ -28,7 +29,7 @@ class LottoShopTest {
     @DisplayName("로또수를_알맞게_발급한다")
     void 로또수를_알맞게_발급한다() {
         //given
-        lottoShop.inputMoney(14000);
+        lottoShop.inputMoney(new Money(14000));
 
         //when
         int lottoCount = lottoShop.getLottoCount();

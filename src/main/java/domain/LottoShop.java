@@ -19,12 +19,8 @@ public class LottoShop {
         this.winningNumbers = new LottoWinningNumbers(winningNumbers);
     }
 
-    public void inputMoney(Integer money) {
+    public void inputMoney(Money money) {
         lottoMachine.inputMoney(money);
-    }
-
-    public int getLottoCount() {
-        return lottoMachine.getLottoCount();
     }
 
     public void generateLottos() {
@@ -43,5 +39,9 @@ public class LottoShop {
 
     public Double getProfitRate() {
         return lottoResult.calculateProfitRate();
+    }
+
+    public int getLottoCount() {
+        return lottoMachine.getLottoCount();
     }
 }

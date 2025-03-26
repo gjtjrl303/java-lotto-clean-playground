@@ -19,7 +19,8 @@ public class LottoController {
     }
 
     public void inputMoney() {
-        Integer money = lottoView.inputMoneyView();
+        Integer amount = lottoView.inputMoneyView();
+        Money money = new Money(amount);
         lottoShop.inputMoney(money);
     }
 
