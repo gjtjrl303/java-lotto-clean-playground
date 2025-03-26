@@ -11,16 +11,20 @@ public class LottoShop {
     private LottoWinningNumbers winningNumbers;
     private LottoResult lottoResult;
 
-    public LottoShop(LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
+    public LottoShop() {
+        lottoMachine = new LottoMachine();
     }
 
-    public void inputWinningNumbers(List<Integer> inputNumbers) {
-        this.winningNumbers = new LottoWinningNumbers(inputNumbers);
+    public void inputWinningNumbers(List<Integer> winningNumbers) {
+        this.winningNumbers = new LottoWinningNumbers(winningNumbers);
     }
 
-    public void inputMoney(Money money) {
+    public void inputMoney(Integer money) {
         lottoMachine.inputMoney(money);
+    }
+
+    public int getLottoCount() {
+        return lottoMachine.getLottoCount();
     }
 
     public void generateLottos() {
@@ -39,9 +43,5 @@ public class LottoShop {
 
     public Double getProfitRate() {
         return lottoResult.calculateProfitRate();
-    }
-
-    public int getLottoCount() {
-        return lottoMachine.getLottoCount();
     }
 }
