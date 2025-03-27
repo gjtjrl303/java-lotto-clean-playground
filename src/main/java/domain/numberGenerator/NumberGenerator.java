@@ -1,4 +1,4 @@
-package domain;
+package domain.numberGenerator;
 
 import java.util.List;
 

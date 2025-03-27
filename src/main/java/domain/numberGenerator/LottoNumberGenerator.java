@@ -1,8 +1,8 @@
-package domain;
+package domain.numberGenerator;
 
 import java.util.*;
 
-public class LottoNumberGenerator {
+public class LottoNumberGenerator implements NumberGenerator {
 
     private final List<Integer> numbers = new ArrayList<>();
 
