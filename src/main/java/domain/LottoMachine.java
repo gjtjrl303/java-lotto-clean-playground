@@ -1,20 +1,21 @@
 package domain;
 
+import domain.numberGenerator.NumberGenerator;
+import repository.LottoRepository;
+
 import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
 
-    private static final int PRICE_PER_LOTTO = 1000;
-
-    private final LottoNumberGenerator numberGenerator;
+    private final NumberGenerator numberGenerator;
     private final LottoRepository lottoRepository;
     private Money money;
 
 
-    public LottoMachine() {
+    public LottoMachine(NumberGenerator numberGenerator) {
         lottoRepository = new LottoRepository();
-        numberGenerator = new LottoNumberGenerator();
+        this.numberGenerator = numberGenerator;
     }
 
     public void inputMoney(Money money) {
