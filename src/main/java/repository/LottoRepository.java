@@ -1,4 +1,6 @@
-package domain;
+package repository;
+
+import domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
