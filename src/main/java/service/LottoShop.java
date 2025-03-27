@@ -1,5 +1,7 @@
-package domain;
+package service;
 
+import domain.*;
+import domain.LottoWinningNumbers;
 import enums.LottoRank;
 
 import java.util.List;
@@ -11,8 +13,8 @@ public class LottoShop {
     private LottoWinningNumbers winningNumbers;
     private LottoResult lottoResult;
 
-    public LottoShop() {
-        lottoMachine = new LottoMachine();
+    public LottoShop(LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
     public void inputWinningNumbers(List<Integer> winningNumbers) {
