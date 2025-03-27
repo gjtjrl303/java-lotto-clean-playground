@@ -1,7 +1,9 @@
 package controller;
 
 import domain.*;
+import domain.numberGenerator.LottoNumberGenerator;
 import enums.LottoRank;
+import service.LottoShop;
 import utils.LottoNumberFormatter;
 import view.LottoView;
 
@@ -14,7 +16,7 @@ public class LottoController {
     private final LottoView lottoView;
 
     public LottoController() {
-        lottoShop = new LottoShop();
+        lottoShop = new LottoShop(new LottoMachine(new LottoNumberGenerator()));
         lottoView = new LottoView();
     }
 
