@@ -1,7 +1,5 @@
 package domain;
 
-import controller.LottoController;
-
 import java.util.List;
 
 public class LottoWinningNumbers {
