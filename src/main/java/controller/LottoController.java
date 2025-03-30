@@ -2,8 +2,7 @@ package controller;
 
 import domain.*;
 import enums.LottoRank;
-import domain.lottoShop;
-import utils.LottoNumberFormatter;
+import domain.LottoShop;
 import view.LottoView;
 
 import java.util.List;
@@ -11,10 +10,10 @@ import java.util.Map;
 
 public class LottoController {
 
-    private final lottoShop lottoShop;
+    private final LottoShop lottoShop;
     private final LottoView lottoView;
 
-    public LottoController(lottoShop lottoShop, LottoView lottoView) {
+    public LottoController(LottoShop lottoShop, LottoView lottoView) {
         this.lottoShop = lottoShop;
         this.lottoView = lottoView;
     }

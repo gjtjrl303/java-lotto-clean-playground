@@ -5,13 +5,13 @@ import enums.LottoRank;
 import java.util.List;
 import java.util.Map;
 
-public class lottoShop {
+public class LottoShop {
 
     private final LottoMachine lottoMachine;
     private LottoWinningNumbers winningNumbers;
     private LottoResult lottoResult;
 
-    public lottoShop(LottoMachine lottoMachine) {
+    public LottoShop(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
     }
 
