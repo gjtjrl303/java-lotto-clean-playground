@@ -19,7 +19,7 @@ class LottoWinningNumbersTest {
         lottoWinningNumbers = new LottoWinningNumbers(numbers1);
 
         List<Integer> numbers2 = new ArrayList<>(List.of(1, 2, 3, 9, 9, 9));
-        Lotto lotto = new Lotto(numbers2);
+        Lotto lotto = Lotto.from(numbers2);
 
         //then
         Assertions.assertThat(lottoWinningNumbers.matchCount(lotto)).isEqualTo(3);

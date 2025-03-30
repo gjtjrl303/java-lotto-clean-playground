@@ -15,7 +15,7 @@ class LottoTest {
     void 로또에_숫자가_정확히_들어가야한다() {
         //given
         ArrayList<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = Lotto.from(numbers);
 
         //when
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
@@ -31,7 +31,7 @@ class LottoTest {
         ArrayList<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
 
         //then
-        assertThatThrownBy(() -> new Lotto(numbers))
+        assertThatThrownBy(() -> Lotto.from(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
