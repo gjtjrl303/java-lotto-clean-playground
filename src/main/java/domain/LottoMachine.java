@@ -1,7 +1,6 @@
 package domain;
 
 import domain.numberGenerator.NumberGenerator;
-import repository.LottoRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,12 +8,12 @@ import java.util.List;
 public class LottoMachine {
 
     private final NumberGenerator numberGenerator;
-    private final LottoRepository lottoRepository;
+    private final Lottos lottos;
     private Money money;
 
 
     public LottoMachine(NumberGenerator numberGenerator) {
-        lottoRepository = new LottoRepository();
+        lottos = new Lottos();
         this.numberGenerator = numberGenerator;
     }
 
@@ -30,7 +29,7 @@ public class LottoMachine {
     }
 
     public List<Lotto> getLottos() {
-        return lottoRepository.getLottoList();
+        return lottos.getLottos();
     }
 
     private Lotto createSingleLotto() {
@@ -40,7 +39,7 @@ public class LottoMachine {
     }
 
     private void saveLotto(Lotto lotto) {
-        lottoRepository.addLotto(lotto);
+        lottos.addLotto(lotto);
     }
 
     public int getLottoCount() {
