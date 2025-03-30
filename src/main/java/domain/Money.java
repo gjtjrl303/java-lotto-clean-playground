@@ -4,18 +4,18 @@ public class Money {
 
     public static final int PRICE_PER_TICKET = 1000;
 
-    private final double amount;
+    private final int amount;
 
-    public Money(double amount) {
+    public Money(int amount) {
         validate(amount);
         this.amount = amount;
     }
 
     public int getPurchasedLottoCount() {
-        return (int) amount / PRICE_PER_TICKET;
+        return amount / PRICE_PER_TICKET;
     }
 
-    private void validate(double value) {
+    private void validate(int value) {
         if (value < PRICE_PER_TICKET) {
             throw new IllegalArgumentException("로또는 최소 1장 이상 구매해야 합니다.");
         }
