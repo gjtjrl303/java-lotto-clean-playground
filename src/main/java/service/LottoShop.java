@@ -17,8 +17,8 @@ public class LottoShop {
         this.lottoMachine = lottoMachine;
     }
 
-    public void inputWinningNumbers(List<Integer> winningNumbers) {
-        this.winningNumbers = new LottoWinningNumbers(winningNumbers);
+    public void inputWinningNumbers(List<Integer> inputNumbers) {
+        this.winningNumbers = new LottoWinningNumbers(inputNumbers);
     }
 
     public void inputMoney(Money money) {
