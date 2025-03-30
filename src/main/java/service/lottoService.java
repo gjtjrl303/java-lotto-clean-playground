@@ -7,13 +7,13 @@ import enums.LottoRank;
 import java.util.List;
 import java.util.Map;
 
-public class LottoShop {
+public class lottoService {
 
     private final LottoMachine lottoMachine;
     private LottoWinningNumbers winningNumbers;
     private LottoResult lottoResult;
 
-    public LottoShop(LottoMachine lottoMachine) {
+    public lottoService(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
     }
 

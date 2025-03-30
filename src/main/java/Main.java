@@ -2,7 +2,7 @@ import controller.LottoController;
 import domain.LottoMachine;
 import domain.numberGenerator.LottoNumberGenerator;
 import domain.numberGenerator.NumberGenerator;
-import service.LottoShop;
+import service.lottoService;
 import view.LottoView;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
 
         NumberGenerator numberGenerator = new LottoNumberGenerator();
         LottoMachine lottoMachine = new LottoMachine(numberGenerator);
-        LottoShop lottoShop = new LottoShop(lottoMachine);
+        lottoService lottoShop = new lottoService(lottoMachine);
 
         LottoController lottoController = new LottoController(lottoShop, new LottoView());
 
