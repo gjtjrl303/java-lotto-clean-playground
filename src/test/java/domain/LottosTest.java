@@ -2,16 +2,15 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import repository.LottoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LottoRepositoryTest {
+class LottosTest {
 
-    LottoRepository lottoRepository = new LottoRepository();
+    Lottos lottoRepository = new Lottos();
 
     @Test
     @DisplayName("로또들이 정상적으로 저장되어야한다")
@@ -23,7 +22,7 @@ class LottoRepositoryTest {
         lottoRepository.addLotto(lotto2);
 
         //when
-        List<Lotto> lottoList = lottoRepository.getLottoList();
+        List<Lotto> lottoList = lottoRepository.getLottos();
 
         //then
         assertThat(lottoList.get(0)).isEqualTo(lotto1);
@@ -37,7 +36,7 @@ class LottoRepositoryTest {
         Lotto lotto = Lotto.from(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
         lottoRepository.addLotto(lotto);
 
-        List<Lotto> list = lottoRepository.getLottoList();
+        List<Lotto> list = lottoRepository.getLottos();
 
         assertThatThrownBy(() -> list.add(Lotto.from(List.of(7, 8, 9, 10, 11, 12))))
                 .isInstanceOf(UnsupportedOperationException.class);
