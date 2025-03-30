@@ -10,6 +10,7 @@ import service.LottoShop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -68,10 +69,17 @@ class LottoShopTest {
 
         //when
         List<Lotto> lottos = lottoShop.getPurchasedLottos();
-        //then
 
-        assertThat(lottos.get(0).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(lottos.get(1).getLottoNumbers()).containsExactly(2, 3, 4, 5, 6, 7);
+        //then
+        assertThat(lottos.get(0).getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList()))
+                .containsExactly(1, 2, 3, 4, 5, 6);
+
+        assertThat(lottos.get(1).getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList()))
+                .containsExactly(2, 3, 4, 5, 6, 7);
     }
 
     @Test
