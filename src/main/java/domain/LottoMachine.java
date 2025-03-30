@@ -36,7 +36,7 @@ public class LottoMachine {
     private Lotto createSingleLotto() {
         List<Integer> numbers = numberGenerator.generateNumbers();
         Collections.sort(numbers);
-        return new Lotto(numbers);
+        return Lotto.from(numbers);
     }
 
     private void saveLotto(Lotto lotto) {

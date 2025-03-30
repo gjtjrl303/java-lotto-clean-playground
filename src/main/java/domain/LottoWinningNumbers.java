@@ -7,7 +7,7 @@ public class LottoWinningNumbers {
     private final Lotto winningNumbers;
 
     public LottoWinningNumbers(List<Integer> numbers) {
-        winningNumbers = new Lotto(numbers);
+        winningNumbers = Lotto.from(numbers);
     }
 
     public Integer matchCount(Lotto lotto) {
