@@ -10,9 +10,9 @@ public class LottoWinningNumbers {
         winningNumbers = Lotto.from(numbers);
     }
 
-    public Integer matchCount(Lotto lotto) {
+    public int matchCount(Lotto lotto) {
         return (int) lotto.getLottoNumbers().stream()
-                .filter(winningNumbers.getLottoNumbers()::contains)
+                .filter(number -> winningNumbers.getLottoNumbers().contains(number))
                 .count();
     }
 }
