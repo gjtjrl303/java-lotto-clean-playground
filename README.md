@@ -94,4 +94,25 @@
 - 역할
   - 입출력 처리
 
+---
+# 도메인과 서비스
+### LottoShop의 메서드 정리
+- inputWinningNumbers()
+  - 지난 주 당첨 번호를 입력받아 저장을 한다.
+- inputMoney()
+  - 사용자로 부터 금액을 받는다
+- generateLottos()
+  - 로또 번호를 생성한다
+- getPurchasedLottos()
+  - 구매한 로또 번호를 반환한다
+- getResultByRank()
+  - 당첨 번호와 구매한 로또 목록을 비교하여 등수별로 몇 개 맞췄는지 결과를 반환합니다.
+- getProfitRate()
+  - 구매한 로또들의 총 수익률을 계산하여 반환합니다.
+- getLottoCount()
+  - 구매한 로또 개수를 반환한다.
 
+## - 정리
+- LottoShop은 로또 구매, 당첨 번호 등록, 당첨 결과 계산, 수익률 계산 등
+모두 현실 세계에서의 의사결정 흐름을 표현하고 있습니다.
+따라서 LottoShop은 도메인 로직을 담당하는 객체라고 볼 수 있습니다.
