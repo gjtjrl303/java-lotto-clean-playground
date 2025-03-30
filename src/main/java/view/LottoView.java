@@ -3,6 +3,7 @@ package view;
 import domain.Lotto;
 import domain.LottoNumber;
 import enums.LottoRank;
+import utils.LottoNumberFormatter;
 
 import java.util.List;
 import java.util.Map;
@@ -24,12 +25,13 @@ public class LottoView {
         }
     }
 
-    public String inputWinningNumbersView() {
+    public List<Integer> inputWinningNumbersView() {
         scanner.nextLine();
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-         return scanner.nextLine();
-
+        String numbersString = scanner.nextLine();
+        List<Integer> inputNumbers = LottoNumberFormatter.parse(numbersString);
+        return inputNumbers;
     }
 
     public void printLotto(Lotto lotto) {
