@@ -1,7 +1,7 @@
 package view;
 
 import domain.Lotto;
-import domain.LottoResult;
+import domain.LottoNumber;
 import enums.LottoRank;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class LottoView {
 
-    Scanner scanner = new Scanner(System.in);
+    final Scanner scanner = new Scanner(System.in);
 
     public int inputMoneyView() {
         System.out.println("구입금액을 입력해 주세요");
@@ -33,7 +33,7 @@ public class LottoView {
     }
 
     public void printLotto(Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         System.out.println(lottoNumbers);
 
     }
