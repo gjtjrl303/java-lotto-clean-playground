@@ -15,9 +15,9 @@ public class LottoController {
     private final LottoShop lottoShop;
     private final LottoView lottoView;
 
-    public LottoController() {
-        lottoShop = new LottoShop(new LottoMachine(new LottoNumberGenerator()));
-        lottoView = new LottoView();
+    public LottoController(LottoShop lottoShop, LottoView lottoView) {
+        this.lottoShop = lottoShop;
+        this.lottoView = lottoView;
     }
 
     public void inputMoney() {
@@ -42,11 +42,11 @@ public class LottoController {
 
     public void inputWinningNumbers() {
         String winningNumberInput = lottoView.inputWinningNumbersView();
-        List<Integer> winningNumbers = LottoNumberFormatter.parse(winningNumberInput);
-        if (winningNumbers.size() != 6) {
+        List<Integer> inputNumbers = LottoNumberFormatter.parse(winningNumberInput);
+        if (inputNumbers.size() != 6) {
             throw new IllegalStateException("숫자를 6개 입력하세요");
         }
-        lottoShop.inputWinningNumbers(winningNumbers);
+        lottoShop.inputWinningNumbers(inputNumbers);
     }
 
     public void printResultByRank() {
