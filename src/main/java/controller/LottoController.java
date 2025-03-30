@@ -2,7 +2,7 @@ package controller;
 
 import domain.*;
 import enums.LottoRank;
-import service.lottoService;
+import domain.lottoShop;
 import utils.LottoNumberFormatter;
 import view.LottoView;
 
@@ -11,50 +11,46 @@ import java.util.Map;
 
 public class LottoController {
 
-    private final lottoService lottoService;
+    private final lottoShop lottoShop;
     private final LottoView lottoView;
 
-    public LottoController(lottoService lottoShop, LottoView lottoView) {
-        this.lottoService = lottoShop;
+    public LottoController(lottoShop lottoShop, LottoView lottoView) {
+        this.lottoShop = lottoShop;
         this.lottoView = lottoView;
     }
 
     public void inputMoney() {
         Integer amount = lottoView.inputMoneyView();
         Money money = new Money(amount);
-        lottoService.inputMoney(money);
+        lottoShop.inputMoney(money);
     }
 
     public void printLottoCount() {
-        int lottoCount = lottoService.getLottoCount();
+        int lottoCount = lottoShop.getLottoCount();
         lottoView.printLottoCount(lottoCount);
     }
 
     public void createLottos() {
-        lottoService.generateLottos();
+        lottoShop.generateLottos();
     }
 
     public void printLottos() {
-        List<Lotto> lottos = lottoService.getPurchasedLottos();
+        List<Lotto> lottos = lottoShop.getPurchasedLottos();
         lottoView.printLottosView(lottos);
     }
 
     public void inputWinningNumbers() {
-        String winningNumberInput = lottoView.inputWinningNumbersView();
-        List<Integer> inputNumbers = LottoNumberFormatter.parse(winningNumberInput);
-        if (inputNumbers.size() != 6) {
-            throw new IllegalStateException("숫자를 6개 입력하세요");
-        }
-        lottoService.inputWinningNumbers(inputNumbers);
+        List<Integer> inputNumbers = lottoView.inputWinningNumbersView();
+        lottoShop.inputWinningNumbers(inputNumbers);
     }
 
     public void printResultByRank() {
-        Map<LottoRank, Integer> resultByRank = lottoService.getResultByRank();
+        Map<LottoRank, Integer> resultByRank = lottoShop.getResultByRank();
         lottoView.printResultByRanks(resultByRank);
     }
 
     public void printProfitRate() {
-        Double profitRate = lottoService.getProfitRate();
+        Double profitRate = lottoShop.getProfitRate();
         lottoView.printProfitRate(profitRate);
     }
 }

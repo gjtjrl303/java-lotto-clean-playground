@@ -4,7 +4,6 @@ import enums.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import service.lottoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +12,9 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LottoServiceTest {
+class LottoShopTest {
 
-    lottoService lottoService;
+    lottoShop lottoShop;
     LottoMachine lottoMachine;
 
     @BeforeEach
@@ -29,7 +28,7 @@ class LottoServiceTest {
                 new ArrayList<>(List.of(7, 8, 9, 10, 11, 12))
         );
         lottoMachine = new LottoMachine(new FakeNumberGenerator(fixedNumbersList));
-        lottoService = new lottoService(lottoMachine);
+        lottoShop = new lottoShop(lottoMachine);
     }
 
     @Test
@@ -37,11 +36,11 @@ class LottoServiceTest {
     void 가격에_맞춰서_로또를_발급한다() {
 
         //given
-        lottoService.inputMoney(new Money(5000));
+        lottoShop.inputMoney(new Money(5000));
 
         //when
-        lottoService.generateLottos();
-        List<Lotto> purchasedLottos = lottoService.getPurchasedLottos();
+        lottoShop.generateLottos();
+        List<Lotto> purchasedLottos = lottoShop.getPurchasedLottos();
 
         //then
         assertThat(purchasedLottos.size()).isEqualTo(5);
@@ -51,10 +50,10 @@ class LottoServiceTest {
     @DisplayName("로또수를_알맞게_발급한다")
     void 로또수를_알맞게_발급한다() {
         //given
-        lottoService.inputMoney(new Money(5000));
+        lottoShop.inputMoney(new Money(5000));
 
         //when
-        int lottoCount = lottoService.getLottoCount();
+        int lottoCount = lottoShop.getLottoCount();
         //then
         assertThat(lottoCount).isEqualTo(5);
     }
@@ -63,11 +62,11 @@ class LottoServiceTest {
     @DisplayName("생성된_로또를_정확히_반환한다")
     void 생성된_로또를_정확히_반환한다() {
         //given
-        lottoService.inputMoney(new Money(2000));
-        lottoService.generateLottos();
+        lottoShop.inputMoney(new Money(2000));
+        lottoShop.generateLottos();
 
         //when
-        List<Lotto> lottos = lottoService.getPurchasedLottos();
+        List<Lotto> lottos = lottoShop.getPurchasedLottos();
 
         //then
         assertThat(lottos.get(0).getLottoNumbers().stream()
@@ -85,12 +84,12 @@ class LottoServiceTest {
     @DisplayName("로또별_맞춘_숫자의_개수를_찾는다")
     void 로또별_맞춘_숫자의_개수를_찾는다() {
         //given
-        lottoService.inputMoney(new Money(5000));
-        lottoService.generateLottos();
-        lottoService.inputWinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        lottoShop.inputMoney(new Money(5000));
+        lottoShop.generateLottos();
+        lottoShop.inputWinningNumbers(List.of(1, 2, 3, 4, 5, 6));
 
         //when
-        Map<LottoRank, Integer> resultByRank = lottoService.getResultByRank();
+        Map<LottoRank, Integer> resultByRank = lottoShop.getResultByRank();
 
 
         //then

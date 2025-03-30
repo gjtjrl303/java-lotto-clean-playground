@@ -1,19 +1,17 @@
-package service;
+package domain;
 
-import domain.*;
-import domain.LottoWinningNumbers;
 import enums.LottoRank;
 
 import java.util.List;
 import java.util.Map;
 
-public class lottoService {
+public class lottoShop {
 
     private final LottoMachine lottoMachine;
     private LottoWinningNumbers winningNumbers;
     private LottoResult lottoResult;
 
-    public lottoService(LottoMachine lottoMachine) {
+    public lottoShop(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
     }
 
