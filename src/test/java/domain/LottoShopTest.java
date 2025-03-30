@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class LottoShopTest {
 
-    lottoShop lottoShop;
+    LottoShop lottoShop;
     LottoMachine lottoMachine;
 
     @BeforeEach
@@ -28,7 +28,7 @@ class LottoShopTest {
                 new ArrayList<>(List.of(7, 8, 9, 10, 11, 12))
         );
         lottoMachine = new LottoMachine(new FakeNumberGenerator(fixedNumbersList));
-        lottoShop = new lottoShop(lottoMachine);
+        lottoShop = new LottoShop(lottoMachine);
     }
 
     @Test
