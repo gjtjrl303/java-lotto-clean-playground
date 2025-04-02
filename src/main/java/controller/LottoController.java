@@ -5,6 +5,7 @@ import enums.LottoRank;
 import domain.LottoShop;
 import view.LottoView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,38 +19,48 @@ public class LottoController {
         this.lottoView = lottoView;
     }
 
-    public void inputMoney() {
-        Integer amount = lottoView.inputMoneyView();
-        Money money = new Money(amount);
-        lottoShop.inputMoney(money);
+    public void run() {
+        LottoPurchase lottoPurchase = PurchaseLottos();
+        LottoWinningNumbers lottoWinningNumbers = inputWinningNumbersAndBonus();
+        LottoResult lottoResult = LottoResult.createLottoResult(lottoWinningNumbers, lottoPurchase);
+
+        printResultByRank(lottoResult.getResultByRank());
+        printProfitRate(lottoResult.getProfitRate());
     }
 
-    public void printLottoCount() {
-        int lottoCount = lottoShop.getLottoCount();
-        lottoView.printLottoCount(lottoCount);
+    private void printProfitRate(Double profitRate) {
+        lottoView.printProfitRate(profitRate);
     }
 
-    public void createLottos() {
-        lottoShop.generateLottos();
-    }
-
-    public void printLottos() {
-        List<Lotto> lottos = lottoShop.getPurchasedLottos();
-        lottoView.printLottosView(lottos);
-    }
-
-    public void inputWinningNumbers() {
-        List<Integer> inputNumbers = lottoView.inputWinningNumbersView();
-        lottoShop.inputWinningNumbers(inputNumbers);
-    }
-
-    public void printResultByRank() {
-        Map<LottoRank, Integer> resultByRank = lottoShop.getResultByRank();
+    private void printResultByRank(Map<LottoRank, Integer> resultByRank) {
         lottoView.printResultByRanks(resultByRank);
     }
 
-    public void printProfitRate() {
-        Double profitRate = lottoShop.getProfitRate();
-        lottoView.printProfitRate(profitRate);
+    private LottoWinningNumbers inputWinningNumbersAndBonus() {
+        List<Integer> inputNumbers = lottoView.inputWinningNumbersView();
+        int inputBonusNumber = lottoView.inputBonusNumberView();
+        return LottoWinningNumbers.from(inputNumbers, inputBonusNumber);
+
+    }
+
+    private LottoPurchase PurchaseLottos() {
+        Money money = Money.from(lottoView.inputPurchaseAmount());
+        LottoCount manualLottoCount = LottoCount.from(lottoView.inputManualLottoCount());
+        List<Lotto> manualLottos = inputManualLottos(manualLottoCount);
+
+
+        LottoPurchase lottoPurchase = lottoShop.purchaseLottos(money, manualLottoCount, manualLottos);
+        lottoView.printPurchaseInfo(lottoPurchase);
+
+        return lottoPurchase;
+    }
+
+    private List<Lotto> inputManualLottos(LottoCount manualLottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        List<List<Integer>> inputLottos = lottoView.inputManualLottos(manualLottoCount);
+        for (List<Integer> inputLotto : inputLottos) {
+            manualLottos.add(Lotto.from(inputLotto));
+        }
+        return manualLottos;
     }
 }
