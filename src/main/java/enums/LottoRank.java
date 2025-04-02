@@ -7,6 +7,7 @@ public enum LottoRank {
     MATCH_3(3, 5_000),
     MATCH_4(4, 50_000),
     MATCH_5(5, 1_500_000),
+    MATCH_5_BONUS(5, 30_000_000),
     MATCH_6(6, 2_000_000_000);
 
     private final int matchCount;
@@ -17,7 +18,11 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static LottoRank from(int matchCount) {
+    public static LottoRank from(int matchCount, boolean bonusMatch) {
+        if (matchCount == 5 && bonusMatch) {
+            return MATCH_5_BONUS;
+        }
+        
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
