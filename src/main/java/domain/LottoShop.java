@@ -2,46 +2,28 @@ package domain;
 
 import enums.LottoRank;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class LottoShop {
 
     private final LottoMachine lottoMachine;
-    private LottoWinningNumbers winningNumbers;
-    private LottoResult lottoResult;
 
     public LottoShop(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
     }
 
-    public void inputWinningNumbers(List<Integer> inputNumbers) {
-        this.winningNumbers = new LottoWinningNumbers(inputNumbers);
-    }
+    public LottoPurchase purchaseLottos(Money money, LottoCount manualCount, List<Lotto> manualLottos) {
+        if (money.getPurchasedLottoCount() < manualCount.getLottoCount()) {
+            throw new IllegalArgumentException("금액이 수동 로또 개수보다 부족합니다.");
+        }
+        LottoCount autoLottoCount = LottoCount.from(money.getPurchasedLottoCount() - manualCount.getLottoCount());
+        List<Lotto> autoLottos = lottoMachine.generateLottos(autoLottoCount);
 
-    public void inputMoney(Money money) {
-        lottoMachine.inputMoney(money);
-    }
+        List<Lotto> allLottos = new ArrayList<>(manualLottos);
+        allLottos.addAll(autoLottos);
 
-    public void generateLottos() {
-        lottoMachine.generateLottos();
-    }
-
-    public List<Lotto> getPurchasedLottos() {
-        return lottoMachine.getLottos();
-    }
-
-    public Map<LottoRank, Integer> getResultByRank() {
-        List<Lotto> lottos = lottoMachine.getLottos();
-        lottoResult = new LottoResult(winningNumbers, lottos);
-        return lottoResult.getResultByRank();
-    }
-
-    public Double getProfitRate() {
-        return lottoResult.calculateProfitRate();
-    }
-
-    public int getLottoCount() {
-        return lottoMachine.getLottoCount();
+        return LottoPurchase.createLottoPurchase(money, manualCount, allLottos);
     }
 }
