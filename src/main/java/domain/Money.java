@@ -6,13 +6,21 @@ public class Money {
 
     private final int amount;
 
-    public Money(int amount) {
+    private Money(int amount) {
         validate(amount);
         this.amount = amount;
     }
 
+    public static Money from(int amount) {
+        return new Money(amount);
+    }
+
     public int getPurchasedLottoCount() {
         return amount / PRICE_PER_TICKET;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     private void validate(int value) {
