@@ -37,4 +37,15 @@ class LottoTest {
         assertThatThrownBy(() -> Lotto.from(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또에는_중복된_숫자가_들어갈_수_없다")
+    void 로또에는_중복된_숫자가_들어갈_수_없다() {
+        //given
+        ArrayList<Integer> numbers = new ArrayList<>(List.of(1, 1, 3, 4, 5, 6));
+
+        //then
+        assertThatThrownBy(() -> Lotto.from(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
